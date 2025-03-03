@@ -12,14 +12,13 @@ def main():
 
     context = zmq.Context()
     publisher_ip = "10.10.159.66"
-    topics = ["teslabot"]
+    topics = ["teslabot-text"]
     query = query_listener(context, publisher_ip, topics)
 
-    # Extract the command from the query
     print(f"Received query: {query}")
     
-    # Fix the regex pattern - 'forawrd' seems to be misspelled and missing capture groups
     try:
+        # TODO - Replace this with the parser to get a list of commands to execute
         command = re.search(r"(forward)", query)
         if command:
             print(f"Extracted command: {command.group(1)}")

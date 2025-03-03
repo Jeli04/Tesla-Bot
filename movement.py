@@ -18,8 +18,10 @@ class Movement():
         self.robot.stop()
         return 
 
+        self.robot.stop()
+
     def turn_left(self):
-        for i in range(10):
+        for _ in range(10):
             self.robot.left(self.speed)
         self.robot.stop()
 if __name__ == "__main__":
