@@ -5,6 +5,7 @@ import ipywidgets.widgets as widgets
 from jetbot import Camera
 from jetbot import bgr8_to_jpeg
 import traitlets
+import time
 
 camera = Camera.instance()
 
@@ -16,9 +17,19 @@ topics = ["teslabot-image"]
 
 print("Publishing starting...")
 
-image = widgets.Image(format='jpeg', width=300, height=300)
-camera_link = traitlets.dlink((camera, 'value'), (image, 'value'), transform=bgr8_to_jpeg)
+try:
+    while True:
+        for i, topic in enumerate(topics):
+            print("Sending...")
+            image = widgets.Image(format='jpeg', width=300, height=300)
+            camera_link = traitlets.dlink((camera, 'value'), (image, 'value'), transform=bgr8_to_jpeg)
 
-# Read image and encode
-image_bytes = image.value
-socket.send(image_bytes)  # Send as bytes
+            # Read image and encode
+            image_bytes = image.value
+            socket.send(image_bytes)  # Send as bytes
+            time.sleep(2)  # Send a message every 2 seconds
+
+except KeyboardInterrupt:
+    print("\nPublisher stopped.")
+    socket.close()
+
