@@ -20,6 +20,5 @@ image = widgets.Image(format='jpeg', width=300, height=300)
 camera_link = traitlets.dlink((camera, 'value'), (image, 'value'), transform=bgr8_to_jpeg)
 
 # Read image and encode
-# image = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
-# _, buffer = cv2.imencode(".jpg", image)
-# socket.send(buffer.tobytes())  # Send as bytes
+image_bytes = image.value
+socket.send(image_bytes)  # Send as bytes
