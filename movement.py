@@ -15,8 +15,10 @@ class Movement():
         while time.time() - start_time < duration:
             self.robot.forward(self.speed, duration)
 
+        self.robot.stop()
+
     def turn_left(self):
-        for i in range(10):
+        for _ in range(10):
             self.robot.left(self.speed)
 
 if __name__ == "__main__":
