@@ -1,5 +1,6 @@
 from jetbot import Robot, Camera
 import traitlets
+import time
 
 class Movement():
     def __init__(self):
@@ -8,14 +9,20 @@ class Movement():
         self.speed = 2.0 # assuming the units are in meters
 
     def forward(self, distance):
-        time = distance / self.speed
-        print(time)
-        self.robot.forward(self.speed, time)
+        duration = distance / self.speed
+        start_time = time.time()
+        
+        while time.time() - start_time < duration:
+            self.robot.forward(self.speed, duration)
+            print(time.time() - start_time)
+        self.robot.stop()
+        return 
 
     def turn_left(self):
-        self.robot.forward(self.speed)
-
+        for i in range(10):
+            self.robot.left(self.speed)
+        self.robot.stop()
 if __name__ == "__main__":
     movement = Movement()
-    movement.forward(2.0)
+    #movement.forward(2.0)
     movement.turn_left()
