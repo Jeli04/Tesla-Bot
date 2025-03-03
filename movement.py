@@ -11,11 +11,10 @@ class Movement():
         time = distance / self.speed   
         self.robot.forward(self.speed, time)
 
-    def turn_left(self, distance):
-        time = distance / self.speed   
-        self.robot.forward(self.speed, time)
+    def turn_left(self):
+        self.robot.forward(self.speed)
 
 if __name__ == "__main__":
     movement = Movement()
     movement.forward(2.0)
-    movement.turn_left(1.0)
+    movement.turn_left()
