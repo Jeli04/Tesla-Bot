@@ -18,6 +18,7 @@ def main():
     try:
         command = re.search(r"(forward)", query)
         if command == "forward":
+            #robot.forward(7.5)
             print(f"Extracted command: {command.group(1)}")
             robot.forward(0.5)
         else:
