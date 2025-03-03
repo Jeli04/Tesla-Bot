@@ -8,7 +8,8 @@ class Movement():
         self.speed = 2.0 # assuming the units are in meters
 
     def forward(self, distance):
-        time = distance / self.speed   
+        time = distance / self.speed
+        print(time)
         self.robot.forward(self.speed, time)
 
     def turn_left(self):
