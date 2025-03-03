@@ -26,7 +26,6 @@ def query_listener(context, publisher_ip, topics):
 
 def image_listener(context, publisher_ip, topics):
     socket = context.socket(zmq.SUB) 
-    publisher_ip = "10.10.159.66"
     socket.connect(f"tcp://{publisher_ip}:5555")
 
     # subscribe to all the topics
@@ -52,7 +51,7 @@ def image_listener(context, publisher_ip, topics):
 
 if __name__ == "__main__":
     context = zmq.Context()
-    publisher_ip = "10.13.233.237"  # Replace with your Jetson Nano's IP address
+    publisher_ip = "10.10.159.64"  
     # query_listener(context, publisher_ip, ["teslabot-text", "teslabot-image"])
     image_listener(context, publisher_ip, ["teslabot-image"])
 

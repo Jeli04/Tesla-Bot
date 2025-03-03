@@ -26,7 +26,7 @@ try:
 
             # Read image and encode
             image_bytes = image.value
-            socket.send(image_bytes)  # Send as bytes
+            socket.send_multipart([topic.encode(), image_bytes])
             time.sleep(2)  # Send a message every 2 seconds
 
 except KeyboardInterrupt:
