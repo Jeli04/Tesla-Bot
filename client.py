@@ -33,6 +33,8 @@ def image_listener(context, publisher_ip, topics):
     for topic in topics:
         socket.setsockopt_string(zmq.SUBSCRIBE, topic)
 
+    print(f"Subscriber started, listening to {topics}...")
+
     # Recieve and deocde the image 
     try:
         while True:
