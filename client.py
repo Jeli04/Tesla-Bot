@@ -47,6 +47,7 @@ def image_listener(context, publisher_ip, topics):
             cv2.imshow("image", image)
             cv2.waitKey(0)  
             cv2.destroyAllWindows()    
+            return image_bytes
     except KeyboardInterrupt:
         print("\nSubscriber stopped.")
         socket.close()

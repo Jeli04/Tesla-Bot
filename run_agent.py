@@ -14,6 +14,10 @@ def main():
     context = zmq.Context()
     publisher_ip = "10.13.234.109" # "10.10.159.66"
     topics = ["teslabot-text"]
+
+    # send image 
+    image_publisher(context, topics, agent.camera):
+
     query = query_listener(context, publisher_ip, topics)   # get the intial query
     complete = False
 

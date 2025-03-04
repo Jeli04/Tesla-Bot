@@ -58,6 +58,10 @@ def main():
 
     pattern = r"(Move forward|Turn right| Turn left)\s+(\d+)"
 
+    context = zmq.Context()
+    publisher_ip = "10.13.132.58"
+    topics = ['teslabot-image']
+    image_bytes = image_listener(context, publisher_ip, topics)
     
     response = ollama.chat(
         model='llama3.2-vision',
@@ -69,7 +73,7 @@ def main():
             {
             'role': 'user',
             'content': 'Go to the backpack.',
-            'images': ['images/test.jpg']
+            'images': [image_bytes]
             }
         ],
         options={"temperature": 0.2, "max_tokens": 200},  
@@ -82,7 +86,6 @@ def main():
     commands = [{"action": action, "value": int(value)} for action, value in matches]
 
     context = zmq.Context()
-    publisher_ip = "10.10.159.64"  
     topics = ['teslabot-text']
     query_publisher(context, topics, commands)
 
