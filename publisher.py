@@ -8,19 +8,36 @@ import traitlets
 import time
 
 
-def query_publisher():
-    
-
-def image_publisher(context, topics):
-    camera = Camera.instance()
-
+def query_publisher(context, topics, query):
     # Setup ZMQ context and socket
-    context = zmq.Context()
     socket = context.socket(zmq.PUB)  # Or zmq.PUSH for a simple pipeline
     socket.bind("tcp://*:5555")
-    topics = ["teslabot-image"]
 
-    print("Publishing starting...")
+    print("Publishing query starting...")
+
+    try:
+        start_time = time.time() 
+        duration = 10  # Run for 10 seconds
+
+        while time.time() - start_time < duration:
+            for i, topic in enumerate(topics):
+                print("Sending...")
+                socket.send_string(f"{topic} {query}")  # Send topic and message
+                time.sleep(2)  # Send a message every 2 seconds
+
+    except KeyboardInterrupt:
+        print("\nPublisher stopped.")
+        socket.close()
+
+
+def image_publisher(context, topics, _camera):
+    camera = _camera.instance()
+
+    # Setup ZMQ context and socket
+    socket = context.socket(zmq.PUB)  # Or zmq.PUSH for a simple pipeline
+    socket.bind("tcp://*:5555")
+
+    print("Publishing image starting...")
 
     try:
         start_time = time.time() 

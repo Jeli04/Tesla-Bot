@@ -12,7 +12,7 @@ def main():
     agent = TeslaBot()
 
     context = zmq.Context()
-    publisher_ip = "10.10.159.66"
+    publisher_ip = "" # "10.10.159.66"
     topics = ["teslabot-text"]
     query = query_listener(context, publisher_ip, topics)   # get the intial query
     complete = False
@@ -21,10 +21,9 @@ def main():
 
     while complete != True:
         try: 
-            # TODO feed to the Agent and get the parsed functions 
-            commands = 
-
-            agent.execute(commands)
+            print("success")
+            exit()
+            agent.execute(query)
             complete = True
 
         except AttributeError:

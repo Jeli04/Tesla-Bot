@@ -2,6 +2,8 @@ import ollama
 import re
 from openai import OpenAI
 import base64
+from publisher import query_publisher
+import zmq
 
 def main():
     # prompt = """
@@ -78,6 +80,11 @@ def main():
     matches = re.findall(pattern, response.message.content)
 
     commands = [{"action": action, "value": int(value)} for action, value in matches]
+
+    context = zmq.Context()
+    publisher_ip = "10.10.159.64"  
+    topics = ['teslabot-text']
+    query_publisher(context, topics, commands)
 
 
     # client = OpenAI()
