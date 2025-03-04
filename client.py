@@ -1,6 +1,7 @@
 import zmq
 import cv2
 import numpy as np
+import ast
 
 def query_listener(context, publisher_ip, topics):
     socket = context.socket(zmq.SUB)  # Create a subscriber socket
@@ -19,6 +20,7 @@ def query_listener(context, publisher_ip, topics):
             message = socket.recv_string()  # Receive message
             print(f"Received: {message}")
             message = message[len(topic) + 1:]  # +1 accounts for the space
+            query = ast.literal_eval(message)
             return message
     except KeyboardInterrupt:
         print("\nSubscriber stopped.")
