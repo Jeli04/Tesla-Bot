@@ -21,6 +21,8 @@ def query_listener(context, publisher_ip, topics):
             print(f"Received (raw): {repr(message)}")
             received_topic, message = message.split(" ", 1)
             query = ast.literal_eval(message)
+            print(type(query))
+            exit()
             return query
     except KeyboardInterrupt:
         print("\nSubscriber stopped.")
