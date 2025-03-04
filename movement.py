@@ -24,10 +24,12 @@ class Movement():
     def turn_left(self, degree):
         for _ in range(degree):
             self.robot.left(self.speed)
+        self.robot.stop()
 
     def turn_right(self, degree):
         for _ in range(degree):
             self.robot.left(self.speed)
+        self.robot.stop()
 
     def stop(self):
         self.robot.stop()

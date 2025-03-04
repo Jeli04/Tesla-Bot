@@ -1,6 +1,6 @@
 from movement import Movement 
 from jetbot import Robot, Camera
-
+import time
 
 class TeslaBot():
     def __init__(self):
@@ -19,6 +19,7 @@ class TeslaBot():
             else:
                 print("invalid action")
                 exit() # TODO change later
+            time.sleep(5)
 
 
 
