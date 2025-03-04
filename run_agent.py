@@ -4,12 +4,12 @@ import sys
 sys.path.append("/home/jetbot/jetbot")
 sys.path.append("/home/jetbot/jetbot/jetbot")
 from jetbot import Robot
-from movement import Movement
+from agent import TeslaBot
+
 
 def main():
     # Initialize the robot
-    robot = Robot()
-    movement = Movement(robot)
+    agent = TeslaBot()
 
     context = zmq.Context()
     publisher_ip = "10.10.159.66"
@@ -22,21 +22,11 @@ def main():
     while complete != True:
         try: 
             # TODO feed to the Agent and get the parsed functions 
-            commands = []
+            commands = 
 
-            for command in commands:
-                action = command['action']
-                value = command['value']
+            agent.execute(commands)
+            complete = True
 
-                if action == "forward":
-                    movement.forward(value)
-                elif action == "turn_left":
-                    movement.turn_left(value)
-                elif action == "turn_right":
-                    movement.turn_right(value)
-                else:
-                    print("Invalid action")
-                    break
         except AttributeError:
             print("Error: Query is None or invalid")
 

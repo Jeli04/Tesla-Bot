@@ -19,11 +19,12 @@ class Movement():
         self.robot.stop()
 
     def turn_left(self, degree):
-        for _ in range(10):
+        for _ in range(degree):
             self.robot.left(self.speed)
 
     def turn_right(self, degree):
-        pass
+        for _ in range(degree):
+            self.robot.left(self.speed)
 
     def stop(self):
         self.robot.stop()
