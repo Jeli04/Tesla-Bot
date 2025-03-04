@@ -23,7 +23,7 @@ def main():
         try: 
             agent.execute(query)
             complete = True
-
+            break
         except AttributeError:
             print("Error: Query is None or invalid")
 

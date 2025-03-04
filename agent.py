@@ -19,7 +19,7 @@ class TeslaBot():
             else:
                 print("invalid action")
                 exit() # TODO change later
-            time.sleep(5)
+            time.sleep(15)
 
 
 
