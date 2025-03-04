@@ -1,5 +1,7 @@
 import ollama
 import re
+import movement
+
 
 # prompt = """
 # You are an AI embedded in a robot car with a camera. You are given text instructions and an image.
@@ -51,8 +53,9 @@ Only give directions on how to get to desired spot from the User. list each step
 make sure to use keywords such as forward, turn right, turn left, followed by a number of how much to move in that direction in meters
 """
 
-pattern = r"(Move forward|Turn right| Turn left)\s+(\d+)"
+tesla_bot = movement()
 
+pattern = r"(Move forward|Turn right| Turn left)\s+(\d+)"
 
 
 response = ollama.chat(
@@ -77,7 +80,17 @@ matches = re.findall(pattern, response.message.content)
 
 commands = [{"action": action, "value": int(value)} for action, value in matches]
 
-print(commands)
+tesla_bot.forward(1,1)
+
+
+for command in commands:
+    if command["action"] == "Move forward":
+        tesla_bot.forward(command["value"])
+    elif command["action"] == "Turn left":
+        tesla_bot.turn_left(command["value"])
+    elif command["action"] == "Turn right":
+        tesla_bot.turn_right(command["value"])
+
 
 
 # from openai import OpenAI
