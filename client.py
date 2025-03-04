@@ -18,6 +18,7 @@ def query_listener(context, publisher_ip, topics):
         while True:
             message = socket.recv_string()  # Receive message
             print(f"Received: {message}")
+            message = message[len(topic) + 1:]  # +1 accounts for the space
             return message
     except KeyboardInterrupt:
         print("\nSubscriber stopped.")
@@ -37,12 +38,12 @@ def image_listener(context, publisher_ip, topics):
     # Recieve and deocde the image 
     try:
         while True:
-            image_bytes = socket.recv_string()  # Receive message
+            topic, image_bytes = socket.recv_multipart()
             image_np = np.frombuffer(image_bytes, dtype=np.uint8)
             image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
             cv2.imshow("image", image)
-            cv2.waitKey(1)
-            break
+            cv2.waitKey(0)  
+            cv2.destroyAllWindows()    
     except KeyboardInterrupt:
         print("\nSubscriber stopped.")
         socket.close()

@@ -1,53 +1,24 @@
-import ollama
+from movement import Movement 
+from jetbot import Robot, Camera
 
-# prompt = """
-# You are an AI embedded in a robot car with a camera. You are given text instructions and an image.
-# Output the function calls to control the robot based on the prompt. The POV of the image is what you are seeing. 
-# The avaliable function calls are:
-# forward(distance), backward(distance), left(distance), right(distance), stop()
-# Use only the neccessary ones. Don't give any uneccessary comments.
-# """
 
-# prompt = """
-# You are an AI embedded in a robot car with a camera. You are given text instructions and an image.
-# Output the function calls to control the robot based on the prompt. The POV of the image is what you are seeing. 
-# The avaliable function calls are:
-# forward(distance), backward(distance), diagonal_left(degree), diagonal_left(right), left(distance), right(distance), stop()
-# Use only the neccessary ones. Don't give any uneccessary comments. 
-# """
+class TeslaBot():
+    def __init__(self):
+        self.robot = Robot()
+        self.speed = 2.0
+        controls = Movement(self.robot)
 
-# prompt = """
-# You are an AI embedded in a robot car with a camera. You are given text instructions and an image.
-# Output the function calls to control the robot based on the prompt. The POV of the image is what you are seeing. 
-# You must be directly facing the objective so turn if neccessary. Be precise. 
-# The avaliable function calls are:
-# forward(distance), backward(distance), turn_left(degree), turn_right(degree), stop()
-# Use only calls you need to get to the objective. Don't give any uneccessary comments. 
-# """
+    def execute(self, commands):
+        for command in commands:
+            if command["action"] == "Move forward":
+                self.movement.forward(command["value"])
+            elif command["action"] == "Turn left":
+                self.movement.tesla_bot.turn_left(command["value"])
+            elif command["action"] == "Turn right":
+                self.movement.tesla_bot.turn_right(command["value"])
+            else:
+                print("invalid action")
+                break
 
-prompt = """
-You are an AI embedded in a robot car with a camera. You are given text instructions and an image.
-Output the function calls to control the robot based on the prompt. The POV of the image is what you are seeing. 
-You must be directly facing the objective so turn if neccessary. Be precise. 
-The avaliable function calls are:
-forward(distance), backward(distance), turn_left(degree), turn_right(degree), stop()
-Use only calls you need to get to the objective. 
-"""
 
-response = ollama.chat(
-    model='llama3.2-vision',
-    messages=[
-        {
-        'role': 'system',
-        'content': prompt
-        },
-        {
-        'role': 'user',
-        'content': 'Go to the TV.',
-        'images': ['images/test2.jpg']
-        }
-    ],
-    options={"temperature": 0.2, "max_tokens": 500},  
-)
 
-print(response)
