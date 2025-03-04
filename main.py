@@ -4,7 +4,7 @@ import sys
 sys.path.append("/home/jetbot/jetbot")
 sys.path.append("/home/jetbot/jetbot/jetbot")
 from jetbot import Robot
-
+            
 
 def main():
     # Initialize the robot

@@ -3,9 +3,10 @@ import traitlets
 import time
 
 class Movement():
-    def __init__(self):
-        self.robot = Robot()
-        self.camera = Camera.instance()
+    def __init__(self, robot=None):
+        assert robot is not None, "Robot instance is required"
+
+        self.robot = robot
         self.speed = 2.0 # assuming the units are in meters
 
     def forward(self, distance):
