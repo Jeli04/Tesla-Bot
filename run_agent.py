@@ -5,6 +5,7 @@ sys.path.append("/home/jetbot/jetbot")
 sys.path.append("/home/jetbot/jetbot/jetbot")
 from jetbot import Robot
 from agent import TeslaBot
+from publisher import image_publisher
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
     topics = ["teslabot-text"]
 
     # send image 
-    image_publisher(context, topics, agent.camera):
+    image_publisher(context, topics, agent.camera)
 
     query = query_listener(context, publisher_ip, topics)   # get the intial query
     complete = False

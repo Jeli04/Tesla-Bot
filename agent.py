@@ -7,7 +7,8 @@ class TeslaBot():
         self.robot = Robot()
         self.speed = 2.0
         self.controls = Movement(self.robot)
-        self.camera = Camera()
+        self.camera = Camera.instance()
+
 
     def execute(self, commands):
         for command in commands:

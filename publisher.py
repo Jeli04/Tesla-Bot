@@ -29,9 +29,7 @@ def query_publisher(context, topics, query):
         socket.close()
 
 
-def image_publisher(context, topics, _camera):
-    camera = _camera.instance()
-
+def image_publisher(context, topics, camera):
     # Setup ZMQ context and socket
     socket = context.socket(zmq.PUB)  # Or zmq.PUSH for a simple pipeline
     socket.bind("tcp://*:5555")
