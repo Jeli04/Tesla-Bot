@@ -58,7 +58,7 @@ def main():
 
     pattern = r"(Move forward|Turn right| Turn left)\s+(\d+)"
 
-
+    
     response = ollama.chat(
         model='llama3.2-vision',
         messages=[
@@ -72,7 +72,7 @@ def main():
             'images': ['images/test.jpg']
             }
         ],
-        options={"temperature": 0.2, "max_tokens": 500},  
+        options={"temperature": 0.2, "max_tokens": 200},  
     )
 
     print(response.message.content)

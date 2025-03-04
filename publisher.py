@@ -2,7 +2,6 @@ import zmq
 import cv2
 import numpy as np
 import ipywidgets.widgets as widgets
-from jetbot import Camera
 from jetbot import bgr8_to_jpeg
 import traitlets
 import time

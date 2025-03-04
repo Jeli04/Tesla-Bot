@@ -21,8 +21,6 @@ def main():
 
     while complete != True:
         try: 
-            print("success")
-            exit()
             agent.execute(query)
             complete = True
 
