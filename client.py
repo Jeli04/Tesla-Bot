@@ -20,7 +20,7 @@ def query_listener(context, publisher_ip, topics):
             message = socket.recv_string()  # Receive message
             print(f"Received: {message}")
             message = message[len(topic) + 1:]  # +1 accounts for the space
-            query = ast.literal_eval(message)
+            message = ast.literal_eval(message)
             return message
     except KeyboardInterrupt:
         print("\nSubscriber stopped.")
